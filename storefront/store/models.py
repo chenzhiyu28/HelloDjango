@@ -36,9 +36,9 @@ class Customer(models.Model):
     last_name = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=255)
-    birt_date = models.DateField(null=True)
+    birth_date = models.DateField(null=True)
     membership = models.CharField(max_length=1, choices=MEMBERSHIP_CHOICES, default=MEMBERSHIP_BRONZE)
-    last_update = models.DateField(auto_now=True)
+    last_update = models.DateTimeField(auto_now=True)
 
 # 1-to-1 relation with customer
 class Address(models.Model):
@@ -69,7 +69,7 @@ class OrderItem(models.Model):
     product = models.OneToOneField(to=Product, on_delete=models.PROTECT)
     quantity = models.PositiveSmallIntegerField()
     unit_price = models.DecimalField(max_digits=6, decimal_places=2) # product price may change, so store it here 
-    last_update = models.DateTimeField()
+    last_update = models.DateTimeField(auto_now=True)
 
 
 class Cart(models.Model):
